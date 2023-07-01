@@ -118,7 +118,7 @@ function drawSquare(convertedVertex, object) {
 }
 
 let colorArray = [
-    {particle: Wall, red: 1, green: 0, blue: 0},
+    {particle: Wall, red: 0, green: 0, blue: 0},
     {particle: Sand, red: 0.7215686274509804, green: 0.5254901960784314, blue: 0.043137254901960784},
     {particle: Water, red: 0.12549019607843137, green: 0.6980392156862745, blue: 0.6666666666666666},
     {particle: Concrete, red: 0.35294117647058826, green: 0.35294117647058826, blue: 0.35294117647058826},

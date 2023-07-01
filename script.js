@@ -4,12 +4,12 @@ let particles = [];
 let particleCount = 0;
 
 let canvas = document.querySelector('canvas');
-canvas.width = 400
-canvas.height = 400;
+canvas.width = 374
+canvas.height = 500;
 let gl = canvas.getContext('webgl');
 
-const columns = 100;
-const rows = 100;
+const columns = 187;
+const rows = 250;
 
 let vertShader;
 let vertShaderSrc;
