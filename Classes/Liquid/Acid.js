@@ -1,5 +1,5 @@
 class Acid extends Liquid {
-    constructor({ x, y, width, height, index, color = {red: 0, green: 170, blue: 0}, producesGas = true }) {
+    constructor({ x, y, width, height, index, color = {red: 0, green: 0.6666666666666666, blue: 0}, producesGas = true }) {
         super({ x, y, width, height, index, color, producesGas });
 
         this.gasToProduce = 'Toxin';

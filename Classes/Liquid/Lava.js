@@ -1,5 +1,5 @@
 class Lava extends Liquid {
-    constructor({ x, y, width, height, index, color = {red: 170, green: 0, blue: 0} }) {
+    constructor({ x, y, width, height, index, color = {red: 0.6666666666666666, green: 0, blue: 0} }) {
         super({ x, y, width, height, index, color });
         this.bufferIndex = 16;
     }

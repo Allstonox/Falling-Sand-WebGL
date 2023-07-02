@@ -1,5 +1,5 @@
 class Sink extends Solid {
-    constructor({ x, y, width, height, index, color = {red: 192, green: 192, blue: 192}, dynamic = false }) {
+    constructor({ x, y, width, height, index, color = {red: 0.7529411764705882, green: 0.7529411764705882, blue: 0.7529411764705882}, dynamic = false }) {
         super({ x, y, width, height, index, color, dynamic });
 
         this.readyToDelete = false;

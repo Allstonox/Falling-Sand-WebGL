@@ -1,5 +1,5 @@
 class Fire extends Particle {
-    constructor({ x, y, width, height, index, color = { red: 170, green: 1, blue: 1 }, dynamic = false }) {
+    constructor({ x, y, width, height, index, color = { red: 0.6666666666666666, green: 0.00392156862745098, blue: 0.00392156862745098 }, dynamic = false }) {
         super({ x, y, width, height, index, color, dynamic });
 
         this.lifeSpan = 10;

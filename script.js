@@ -5,11 +5,11 @@ let particleCount = 0;
 
 let canvas = document.querySelector('canvas');
 canvas.width = 374
-canvas.height = 500;
+canvas.height = 400;
 let gl = canvas.getContext('webgl');
 
 const columns = 187;
-const rows = 250;
+const rows = 200;
 
 let vertShader;
 let vertShaderSrc;
@@ -20,16 +20,13 @@ let shaderProgram;
 function defineShaders() {
     // Create a vertex shader object
     vertShader = gl.createShader(gl.VERTEX_SHADER);
-    vertShaderSrc = 'attribute vec2 pos; void main() { gl_Position = vec4(pos, 0.0, 1.0); }';
+    vertShaderSrc = 'attribute vec4 a_Position; attribute vec4 a_Color; varying vec4 v_Color; void main() { gl_Position = a_Position; v_Color = a_Color;}';
     gl.shaderSource(vertShader, vertShaderSrc);
     gl.compileShader(vertShader);
 
-    let red = Math.random();
-    let green = Math.random();
-    let blue = Math.random();
     // Create a fragment shader object
     fragShader = gl.createShader(gl.FRAGMENT_SHADER);
-    fragShaderSrc = 'precision mediump float; uniform vec4 color; void main() { gl_FragColor = color; }';
+    fragShaderSrc = 'precision mediump float; varying vec4 v_Color; void main() { gl_FragColor = v_Color;}';
     gl.shaderSource(fragShader, fragShaderSrc);
     gl.compileShader(fragShader);
 
@@ -41,28 +38,28 @@ function defineShaders() {
     gl.useProgram(shaderProgram);
 }
 
-function drawStuff(vertices, colorIndex) {
-    //Setting color
-    shaderProgram.color = gl.getUniformLocation(shaderProgram, 'color');
-    gl.uniform4fv(shaderProgram.color, [colorArray[colorIndex].red, colorArray[colorIndex].green, colorArray[colorIndex].blue, 1]);
+function drawStuff(vertexData, colorData) {
+    var vertices = new Float32Array(vertexData);
+    var color = new Float32Array(colorData);
+    // var vertices = new Float32Array([-0.8, -0.8, 0.8, -0.8, 0.0, 0.8]);
+    // var color = new Float32Array([  1.0, 0.0, 1.0, 
+    //                                 1.0, 0.0, 1.0,
+    //                                 1.0, 0.0, 1.0
+    //                             ]);
 
-    // Define the geometry and store it in buffer objects
-    let vertexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    var buffer_object = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer_object);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+    var a_Position = gl.getAttribLocation(shaderProgram, 'a_Position');
+    gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(a_Position);
 
-    // Get the attribute location
-    let posAttrib = gl.getAttribLocation(shaderProgram, 'pos');
-
-    // Point an attribute to the currently bound VBO
-    gl.vertexAttribPointer(posAttrib, 2, gl.FLOAT, false, 0, 0);
-
-    // Enable the attribute
-    gl.enableVertexAttribArray(posAttrib);
-
-    // Clear the canvas
-    // gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    // gl.clear(gl.COLOR_BUFFER_BIT);
+    var color_object = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, color_object);
+    gl.bufferData(gl.ARRAY_BUFFER, color, gl.STATIC_DRAW);
+    var a_Color = gl.getAttribLocation(shaderProgram, 'a_Color');
+    gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(a_Color);
 
     // Draw the triangle
     gl.drawArrays(gl.TRIANGLES, 0, vertices.length / 2);
@@ -111,7 +108,7 @@ canvas.addEventListener("mousedown", (e) => {
 canvas.addEventListener("mousemove", (e) => {
     let newX = e.x - rect.left;
     let newY = e.y - rect.top;
-    if(drawing) {
+    if (drawing) {
         if (newX != currentX || newY != currentY) {
             drawLine(currentX, currentY, newX, newY);
         }
@@ -132,7 +129,7 @@ canvas.addEventListener("touchmove", (e) => {
     e.preventDefault();
     let newX = e.touches[0].clientX - rect.left;
     let newY = e.touches[0].clientY - rect.top;
-    if(drawing) {
+    if (drawing) {
         if (newX != currentX || newY != currentY) {
             drawLine(currentX, currentY, newX, newY);
         }
@@ -158,7 +155,7 @@ function draw() {
 //Play & Pause Events
 const playButton = document.querySelector('.play-button');
 const pauseButton = document.querySelector('.pause-button');
-let playing = true; 
+let playing = true;
 
 playButton.addEventListener('click', (event) => {
     playing = true;
@@ -205,7 +202,7 @@ largeBrush.addEventListener('click', (event) => {
 const lagSwitch = document.querySelector('#lag-switch');
 let lagSwitchOn = false;
 lagSwitch.addEventListener('click', (event) => {
-    if(lagSwitch.checked) lagSwitchOn = true;
+    if (lagSwitch.checked) lagSwitchOn = true;
     else lagSwitchOn = false;
 });
 
@@ -214,33 +211,27 @@ lagSwitch.addEventListener('click', (event) => {
 let bufferIndices = 50;
 function animate() {
     window.requestAnimationFrame(animate);
+    // gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     for (let i = particles.length - 1; i > -1; i--) {
-        if(particles[i] != null) {
-            if(playing) {
+        if (particles[i] != null) {
+            if (playing) {
                 particles[i].update();
             }
         }
     }
     let buffer = [];
-    for (let i = 0; i < bufferIndices; i++) {
-        buffer[i] = [];
-    }
-    let square;
+    let colorBuffer = [];
     for (let i = 0; i < particles.length; i++) {
         let convertedVertex = vertexConversion(particles[i].x, particles[i].y);
-        square = drawSquare(convertedVertex, particles[i]);
+        let square = drawSquare(convertedVertex, particles[i]);
         for (let j = 0; j < square.length; j++) {
-            buffer[particles[i].bufferIndex].push(square[j]);
+            buffer.push(square[j].x, square[j].y);
+            colorBuffer.push(particles[i].color.red, particles[i].color.green, particles[i].color.blue);
         }
     }
-    let drawCount = 0;
-    for (let i = 0; i < bufferIndices; i++) {
-        if(buffer[i][0] != null) {
-            drawStuff(buffer[i], i);
-        }
-    }
+    drawStuff(buffer, colorBuffer);
     if (particleCount != particles.length - 870) {
         particleCount = particles.length - 870;
         console.log(particleCount);
@@ -249,5 +240,5 @@ function animate() {
 }
 defineShaders();
 createGrid();
-animate();
 draw();
+animate();

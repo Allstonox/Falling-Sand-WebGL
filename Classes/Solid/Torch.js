@@ -1,5 +1,5 @@
 class Torch extends Solid {
-    constructor({ x, y, width, height, index, color = {red: 80, green: 30, blue: 30}, dynamic = false }) {
+    constructor({ x, y, width, height, index, color = {red: 0.3137254901960784, green: 0.11764705882352941, blue: 0.11764705882352941}, dynamic = false }) {
         super({ x, y, width, height, index, color, dynamic });
         this.bufferIndex = 14;
     }

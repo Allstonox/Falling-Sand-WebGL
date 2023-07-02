@@ -98,22 +98,15 @@ function vertexConversion(x, y) {
     return result;
 }
 
-function colorConversion(r, g, b) {
-    newRed = r / 255;
-    newGreen = g / 255;
-    newBlue = b / 255;
-    return {r: newRed, g: newGreen, b: newBlue};
-}
-
 function drawSquare(convertedVertex, object) {
     let newHeight = object.height / canvas.height;
     let newWidth = object.width / canvas.width;
-    let square = [  convertedVertex.x, convertedVertex.y, 
-                    convertedVertex.x + newWidth, convertedVertex.y,
-                    convertedVertex.x + newWidth, convertedVertex.y + newHeight,
-                    convertedVertex.x + newWidth, convertedVertex.y + newHeight,
-                    convertedVertex.x, convertedVertex.y + newHeight,
-                    convertedVertex.x, convertedVertex.y];
+    let square = [  {x: convertedVertex.x, y: convertedVertex.y}, 
+                    {x: convertedVertex.x + newWidth, y: convertedVertex.y},
+                    {x: convertedVertex.x + newWidth, y: convertedVertex.y + newHeight},
+                    {x: convertedVertex.x + newWidth, y: convertedVertex.y + newHeight},
+                    {x: convertedVertex.x, y: convertedVertex.y + newHeight},
+                    {x: convertedVertex.x, y: convertedVertex.y}];
     return square;
 }
 

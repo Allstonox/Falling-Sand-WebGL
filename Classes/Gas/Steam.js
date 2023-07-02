@@ -1,5 +1,5 @@
 class Steam extends Gas {
-    constructor({ x, y, width, height, index, color = { red: 150, green: 150, blue: 150 } }) {
+    constructor({ x, y, width, height, index, color = { red: 0.5882352941176471, green: 0.5882352941176471, blue: 0.5882352941176471 } }) {
         super({ x, y, width, height, index, color });
 
         this.lifeSpan = Math.random() * 500 + 1000;

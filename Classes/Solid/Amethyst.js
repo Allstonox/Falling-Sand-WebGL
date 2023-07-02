@@ -1,5 +1,5 @@
 class Amethyst extends Solid {
-    constructor({ x, y, width, height, index, color = { red: 100, green: 0, blue: 100 }, dynamic = false }) {
+    constructor({ x, y, width, height, index, color = { red: 0.39215686274509803, green: 0, blue: 0.39215686274509803 }, dynamic = false }) {
         super({ x, y, width, height, index, color, dynamic });
 
         this.growthRate = 0.05;

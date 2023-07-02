@@ -10,7 +10,7 @@ class Particle {
         this.color = color;
         this.bufferIndex = bufferIndex;
         if (!(this instanceof Wall)) {
-            this.randomColor = Math.random() * 50;
+            this.randomColor = Math.random() * 0.5;
             this.color.red = this.color.red + this.randomColor;
             this.color.green = this.color.green + this.randomColor;
             this.color.blue = this.color.blue + this.randomColor;
