@@ -20,8 +20,8 @@ class Steam extends Gas {
             width: grid[this.index.row][this.index.column].width,
             height: grid[this.index.row][this.index.column].height,
             index: {
-                row: grid[this.index.row][this.index.column].y / (canvas.height / rows),
-                column: grid[this.index.row][this.index.column].x / (canvas.width / columns),
+                row: this.index.row,
+                column: this.index.column,
             },
         }));
         particles.splice(particles.indexOf(grid[this.index.row][this.index.column].particle), 1);

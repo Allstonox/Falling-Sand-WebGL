@@ -23,8 +23,8 @@ class Acid extends Liquid {
                                 width: grid[i][j].width,
                                 height: grid[i][j].height,
                                 index: {
-                                    row: grid[i][j].y / (canvas.height / rows),
-                                    column: grid[i][j].x / (canvas.width / columns),
+                                    row: i,
+                                    column: j,
                                 },
                             }));
                             particles.splice(particles.indexOf(grid[i][j].particle), 1);

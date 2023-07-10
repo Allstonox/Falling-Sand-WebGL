@@ -9,11 +9,17 @@ class Particle {
         this.flammable = flammable;
         this.color = color;
         this.bufferIndex = bufferIndex;
-        if (!(this instanceof Wall)) {
-            this.randomColor = Math.random() * 0.5;
+        if (!(this instanceof Wall) && !(this instanceof Liquid)) {
+            this.randomColor = Math.random() * 0.2;
             this.color.red = this.color.red + this.randomColor;
             this.color.green = this.color.green + this.randomColor;
             this.color.blue = this.color.blue + this.randomColor;
+        }
+        else if (this instanceof Liquid) {
+            this.randomColor = Math.random() * 0.05;
+            this.color.red = this.color.red - this.randomColor;
+            this.color.green = this.color.green - this.randomColor;
+            this.color.blue = this.color.blue - this.randomColor;
         }
     }
 }

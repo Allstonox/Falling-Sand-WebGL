@@ -49,8 +49,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -61,8 +61,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -73,8 +73,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -85,8 +85,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -97,8 +97,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -109,8 +109,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -121,8 +121,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -133,8 +133,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -145,8 +145,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -157,8 +157,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -169,8 +169,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -181,8 +181,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -193,8 +193,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -205,8 +205,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -217,8 +217,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;
@@ -229,8 +229,8 @@ class Grid {
                         width: grid[theRow][theColumn].width,
                         height: grid[theRow][theColumn].height,
                         index: {
-                            row: grid[theRow][theColumn].y / (canvas.height / rows),
-                            column: grid[theRow][theColumn].x / (canvas.width / columns),
+                            row: theRow,
+                            column: theColumn,
                         },
                     }));
                     break;

@@ -16,8 +16,8 @@ class Spout extends Solid {
                 width: this.width,
                 height: grid[this.index.row + 1][this.index.column].height,
                 index: {
-                    row: grid[this.index.row + 1][this.index.column].y / (canvas.height / rows),
-                    column: grid[this.index.row + 1][this.index.column].x / (canvas.width / columns),
+                    row: this.index.row + 1,
+                    column: this.index.column,
                 },
             }));
             grid[this.index.row + 1][this.index.column].particle = particles[particles.length - 1];
