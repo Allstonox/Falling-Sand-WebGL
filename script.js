@@ -4,12 +4,15 @@ let particles = [];
 let particleCount = 0;
 
 let canvas = document.querySelector('canvas');
-canvas.width = 374;
-canvas.height = 500;
+canvas.width = Math.min(window.innerWidth, 750);
+if(canvas.width % 2 > 0) {
+    canvas.width += 1;
+}
+canvas.height = 600;
 let gl = canvas.getContext('webgl');
 
-const columns = 187;
-const rows = 250;
+const columns = canvas.width / 2;
+const rows = canvas.height / 2;
 
 let vertShader;
 let vertShaderSrc;
@@ -217,12 +220,10 @@ lagSwitch.addEventListener('click', (event) => {
 //Main loop
 let bufferIndices = 50;
 function animate() {
+    const t0 = performance.now();
     window.requestAnimationFrame(animate);
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
-    // let buffer = [0, 500, 300, 200, 300, 300];
-    // let colors = 1;
-    // drawStuff(buffer, colors);
     for (let i = particles.length - 1; i > -1; i--) {
         if(particles[i] != null) {
             if(playing) {
@@ -249,6 +250,8 @@ function animate() {
     //     console.log(particleCount);
     // }
     rect = canvas.getBoundingClientRect();
+    const t1 = performance.now();
+    // console.log(` ${1000 / (t1 - t0)} FPS`);
 }
 defineShaders();
 createGrid();

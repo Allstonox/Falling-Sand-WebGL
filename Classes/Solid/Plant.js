@@ -1,5 +1,5 @@
 class Plant extends Solid {
-    constructor({ x, y, width, height, index, color = {red: 0.00392156862745098, green: 0.3137254901960784, blue: 0.00392156862745098}, dynamic = false, flammable = 'true' }) {
+    constructor({ x, y, width, height, index, color = {red: 0, green: 0.3, blue: 0}, dynamic = false, flammable = 'true' }) {
         super({ x, y, width, height, index, color, dynamic, flammable });
 
         this.readyToGrow = false;

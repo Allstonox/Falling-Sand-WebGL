@@ -1,5 +1,5 @@
 class Water extends Liquid {
-    constructor({ x, y, width, height, index, color = {red: 0.12549019607843137, green: 0.6980392156862745, blue: 0.6666666666666666}, producesGas = true }) {
+    constructor({ x, y, width, height, index, color = {red: 0.1, green: 0.6, blue: 0.6}, producesGas = true }) {
         super({ x, y, width, height, index, color, producesGas });
 
         this.gasToProduce = 'Steam';

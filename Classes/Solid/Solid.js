@@ -36,34 +36,31 @@ class Solid extends Particle {
     }
 
     interact() {
-        if (grid[this.index.row + 1][this.index.column].particle != null) {
-            if (grid[this.index.row + 1][this.index.column + 1].particle === null && grid[this.index.row + 1][this.index.column - 1].particle != null) {
-                this.index.row += 1;
-                this.index.column += 1;
-                this.x = grid[this.index.row][this.index.column].x;
-                this.y = grid[this.index.row][this.index.column].y;
-                grid[this.index.row][this.index.column].particle = this;
-                grid[this.index.row - 1][this.index.column - 1].particle = null;
-            }
-            else if (grid[this.index.row + 1][this.index.column + 1].particle != null && grid[this.index.row + 1][this.index.column - 1].particle != null) {
-                return;
-            }
-            else if (grid[this.index.row + 1][this.index.column + 1].particle != null && grid[this.index.row + 1][this.index.column - 1].particle === null) {
-                this.index.row += 1;
-                this.index.column -= 1;
-                this.x = grid[this.index.row][this.index.column].x;
-                this.y = grid[this.index.row][this.index.column].y;
-                grid[this.index.row][this.index.column].particle = this;
-                grid[this.index.row - 1][this.index.column + 1].particle = null;
-            }
-            else if (grid[this.index.row + 1][this.index.column + 1].particle === null && grid[this.index.row + 1][this.index.column - 1].particle === null) {
-                this.pickRandomCorner();
-            }
+        if (grid[this.index.row + 1][this.index.column + 1].particle === null && grid[this.index.row + 1][this.index.column - 1].particle != null) {
+            this.index.row += 1;
+            this.index.column += 1;
+            this.x = grid[this.index.row][this.index.column].x;
+            this.y = grid[this.index.row][this.index.column].y;
+            grid[this.index.row][this.index.column].particle = this;
+            grid[this.index.row - 1][this.index.column - 1].particle = null;
+        }
+        else if (grid[this.index.row + 1][this.index.column + 1].particle != null && grid[this.index.row + 1][this.index.column - 1].particle != null) {
+            return;
+        }
+        else if (grid[this.index.row + 1][this.index.column + 1].particle != null && grid[this.index.row + 1][this.index.column - 1].particle === null) {
+            this.index.row += 1;
+            this.index.column -= 1;
+            this.x = grid[this.index.row][this.index.column].x;
+            this.y = grid[this.index.row][this.index.column].y;
+            grid[this.index.row][this.index.column].particle = this;
+            grid[this.index.row - 1][this.index.column + 1].particle = null;
+        }
+        else if (grid[this.index.row + 1][this.index.column + 1].particle === null && grid[this.index.row + 1][this.index.column - 1].particle === null) {
+            this.pickRandomCorner();
         }
     }
 
     sink() {
-        if (grid[this.index.row + 1][this.index.column].particle != null) {
             if (grid[this.index.row + 1][this.index.column].particle instanceof Liquid) {
                 let particleToSwap = particles[particles.indexOf(grid[this.index.row + 1][this.index.column].particle)];
                 this.index.row += 1;
@@ -73,7 +70,6 @@ class Solid extends Particle {
                 grid[particleToSwap.index.row][particleToSwap.index.column].particle = particleToSwap;
                 grid[this.index.row][this.index.column].particle = this;
             }
-        }
     }
 
     pickRandomCorner() {
