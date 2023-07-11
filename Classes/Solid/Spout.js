@@ -9,18 +9,20 @@ class Spout extends Solid {
     }
 
     drip() {
-        if (grid[this.index.row + 1][this.index.column].particle === null) {
-            particles.push(new Water({
-                x: grid[this.index.row + 1][this.index.column].x,
-                y: grid[this.index.row + 1][this.index.column].y,
-                width: this.width,
-                height: grid[this.index.row + 1][this.index.column].height,
-                index: {
-                    row: this.index.row + 1,
-                    column: this.index.column,
-                },
-            }));
-            grid[this.index.row + 1][this.index.column].particle = particles[particles.length - 1];
+        if(Math.random() > 0.95) {
+            if (grid[this.index.row + 1][this.index.column].particle === null) {
+                particles.push(new Water({
+                    x: grid[this.index.row + 1][this.index.column].x,
+                    y: grid[this.index.row + 1][this.index.column].y,
+                    width: this.width,
+                    height: grid[this.index.row + 1][this.index.column].height,
+                    index: {
+                        row: this.index.row + 1,
+                        column: this.index.column,
+                    },
+                }));
+                grid[this.index.row + 1][this.index.column].particle = particles[particles.length - 1];
+            }
         }
     }
 }

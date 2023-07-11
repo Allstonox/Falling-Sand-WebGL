@@ -108,7 +108,7 @@ function colorConversion(r, g, b) {
 }
 
 function drawSquare(convertedVertex, object) {
-    let newHeight = object.height;;
+    let newHeight = object.height;
     let newWidth = object.width;
     let square = [  convertedVertex.x, convertedVertex.y, 
                     convertedVertex.x + newWidth, convertedVertex.y,

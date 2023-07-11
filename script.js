@@ -5,7 +5,7 @@ let particleCount = 0;
 
 let canvas = document.querySelector('canvas');
 canvas.width = Math.min(window.innerWidth, 750);
-if(canvas.width % 2 > 0) {
+if (canvas.width % 2 > 0) {
     canvas.width += 1;
 }
 canvas.height = 600;
@@ -23,7 +23,7 @@ let shaderProgram;
 function defineShaders() {
     // Create a vertex shader object
     vertShader = gl.createShader(gl.VERTEX_SHADER);
-    vertShaderSrc = 'attribute vec2 pos; attribute vec4 a_Color; varying vec4 v_Color; uniform vec2 u_resolution; void main() { vec2 zeroToOne = pos / u_resolution; vec2 zeroToTwo = zeroToOne * 2.0; vec2 clipSpace = (zeroToTwo - 1.0); gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1); v_Color = a_Color;}';
+    vertShaderSrc = 'attribute vec2 pos; attribute vec4 a_Color; varying vec4 v_Color; uniform vec2 u_resolution; void main() { vec2 zeroToOne = pos / u_resolution; vec2 zeroToTwo = zeroToOne * 2.0; vec2 clipSpace = (zeroToTwo - 1.0); gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1); gl_PointSize = 2.0; v_Color = a_Color;}';
     gl.shaderSource(vertShader, vertShaderSrc);
     gl.compileShader(vertShader);
 
@@ -32,7 +32,7 @@ function defineShaders() {
     let blue = Math.random();
     // Create a fragment shader object
     fragShader = gl.createShader(gl.FRAGMENT_SHADER);
-    fragShaderSrc = 'precision mediump float; varying vec4 v_Color; void main() { gl_FragColor = v_Color; }';
+    fragShaderSrc = 'precision lowp float; varying vec4 v_Color; void main() { gl_FragColor = v_Color; }';
     gl.shaderSource(fragShader, fragShaderSrc);
     gl.compileShader(fragShader);
 
@@ -72,7 +72,7 @@ function drawStuff(vertices, colorData) {
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
     // Draw the triangle
-    gl.drawArrays(gl.TRIANGLES, 0, vertices.length / 2);
+    gl.drawArrays(gl.POINTS, 0, vertices.length / 2);
 }
 
 function createGrid() {
@@ -118,7 +118,7 @@ canvas.addEventListener("mousedown", (e) => {
 canvas.addEventListener("mousemove", (e) => {
     let newX = e.x - rect.left;
     let newY = e.y - rect.top;
-    if(drawing) {
+    if (drawing) {
         if (newX != currentX || newY != currentY) {
             drawLine(currentX, currentY, newX, newY);
         }
@@ -139,7 +139,7 @@ canvas.addEventListener("touchmove", (e) => {
     e.preventDefault();
     let newX = e.touches[0].clientX - rect.left;
     let newY = e.touches[0].clientY - rect.top;
-    if(drawing) {
+    if (drawing) {
         if (newX != currentX || newY != currentY) {
             drawLine(currentX, currentY, newX, newY);
         }
@@ -165,7 +165,7 @@ function draw() {
 //Play & Pause Events
 const playButton = document.querySelector('.play-button');
 const pauseButton = document.querySelector('.pause-button');
-let playing = true; 
+let playing = true;
 
 playButton.addEventListener('click', (event) => {
     playing = true;
@@ -212,7 +212,7 @@ largeBrush.addEventListener('click', (event) => {
 const lagSwitch = document.querySelector('#lag-switch');
 let lagSwitchOn = false;
 lagSwitch.addEventListener('click', (event) => {
-    if(lagSwitch.checked) lagSwitchOn = true;
+    if (lagSwitch.checked) lagSwitchOn = true;
     else lagSwitchOn = false;
 });
 
@@ -220,38 +220,32 @@ lagSwitch.addEventListener('click', (event) => {
 //Main loop
 let bufferIndices = 50;
 function animate() {
-    const t0 = performance.now();
-    window.requestAnimationFrame(animate);
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    for (let i = particles.length - 1; i > -1; i--) {
-        if(particles[i] != null) {
-            if(playing) {
-                particles[i].update();
+        // const t0 = performance.now();
+        window.requestAnimationFrame(animate);
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        for (let i = particles.length - 1; i > -1; i--) {
+            if (particles[i] != null) {
+                if (playing) {
+                    particles[i].update();
+                }
             }
         }
-    }
-    let buffer = [];
-    let colorBuffer = [];
-    let square;
-    for (let i = 0; i < particles.length; i++) {
-        let convertedVertex = vertexConversion(particles[i].x, particles[i].y);
-        square = drawSquare(convertedVertex, particles[i]);
-        for (let j = 0; j < square.length; j++) {
-            buffer.push(square[j]);
-            if(j % 2) {
-                colorBuffer.push(particles[i].color.red, particles[i].color.green, particles[i].color.blue);
-            }
+        let buffer = [];
+        let colorBuffer = [];
+        let square;
+        for (let i = 0; i < particles.length; i++) {
+            buffer.push(particles[i].x, particles[i].y);
+            colorBuffer.push(particles[i].color.red, particles[i].color.green, particles[i].color.blue);
         }
-    }
-    drawStuff(buffer, colorBuffer);
-    // if (particleCount != particles.length - 870) {
-    //     particleCount = particles.length - 870;
-    //     console.log(particleCount);
-    // }
-    rect = canvas.getBoundingClientRect();
-    const t1 = performance.now();
-    // console.log(` ${1000 / (t1 - t0)} FPS`);
+        drawStuff(buffer, colorBuffer);
+        // if (particleCount != particles.length) {
+        //     particleCount = particles.length;
+        //     console.log(particleCount);
+        // }
+        // const t1 = performance.now();
+        // console.log(` ${1000 / (t1 - t0)} FPS`);
+        rect = canvas.getBoundingClientRect();
 }
 defineShaders();
 createGrid();
