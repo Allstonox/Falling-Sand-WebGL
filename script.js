@@ -27,9 +27,6 @@ function defineShaders() {
     gl.shaderSource(vertShader, vertShaderSrc);
     gl.compileShader(vertShader);
 
-    let red = Math.random();
-    let green = Math.random();
-    let blue = Math.random();
     // Create a fragment shader object
     fragShader = gl.createShader(gl.FRAGMENT_SHADER);
     fragShaderSrc = 'precision lowp float; varying vec4 v_Color; void main() { gl_FragColor = v_Color; }';
@@ -162,7 +159,7 @@ function draw() {
     }
 }
 
-//Play & Pause Events
+// Play & Pause Events
 const playButton = document.querySelector('.play-button');
 const pauseButton = document.querySelector('.pause-button');
 let playing = true;
@@ -180,9 +177,14 @@ pauseButton.addEventListener('click', (event) => {
     pauseButton.classList.toggle('active');
 });
 
-//Menu button events
-const menu = document.querySelector('.menu');
-const buttons = menu.querySelectorAll('button');
+// Menu button events
+const itemMenuIcon = document.querySelector('.item-menu-icon');
+const itemMenu = document.querySelector('.item-menu');
+const buttons = itemMenu.querySelectorAll('button');
+
+itemMenuIcon.addEventListener('click', () => {
+    itemMenu.classList.toggle('visible');
+})
 
 buttons.forEach(button => {
     button.addEventListener('click', (event) => {
@@ -191,7 +193,14 @@ buttons.forEach(button => {
             if (button.classList.contains('active')) button.classList.toggle('active');
         });
         event.target.classList.toggle('active');
+        itemMenu.classList.toggle('visible');
     })
+});
+
+const brushMenuIcon = document.querySelector('.brush-menu-icon');
+const brushMenu = document.querySelector('.brush-menu');
+brushMenuIcon.addEventListener('click', () => {
+    brushMenu.classList.toggle('visible');
 });
 
 let brushSize = 'Medium';
@@ -201,20 +210,23 @@ const largeBrush = document.querySelector('#Large');
 
 smallBrush.addEventListener('click', (event) => {
     brushSize = 'Small';
+    brushMenu.classList.toggle('visible');
 });
 mediumBrush.addEventListener('click', (event) => {
     brushSize = 'Medium';
+    brushMenu.classList.toggle('visible');
 });
 largeBrush.addEventListener('click', (event) => {
     brushSize = 'Large';
+    brushMenu.classList.toggle('visible');
 });
 
-const lagSwitch = document.querySelector('#lag-switch');
-let lagSwitchOn = false;
-lagSwitch.addEventListener('click', (event) => {
-    if (lagSwitch.checked) lagSwitchOn = true;
-    else lagSwitchOn = false;
-});
+// const lagSwitch = document.querySelector('#lag-switch');
+// let lagSwitchOn = false;
+// lagSwitch.addEventListener('click', (event) => {
+//     if (lagSwitch.checked) lagSwitchOn = true;
+//     else lagSwitchOn = false;
+// });
 
 
 //Main loop
@@ -233,7 +245,6 @@ function animate() {
         }
         let buffer = [];
         let colorBuffer = [];
-        let square;
         for (let i = 0; i < particles.length; i++) {
             buffer.push(particles[i].x, particles[i].y);
             colorBuffer.push(particles[i].color.red, particles[i].color.green, particles[i].color.blue);

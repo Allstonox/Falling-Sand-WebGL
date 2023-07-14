@@ -10,31 +10,46 @@
 </head>
 
 <body>
-    <canvas></canvas>
-    <div class="simulation-menu">
-        <button class="play-button active" style="--accent: green"><ion-icon name="play-outline"></ion-icon></button>
-        <button class="pause-button" style="--accent: green"><ion-icon name="pause-outline"></ion-icon></button>
+    <div class="canvas-wrapper">
+        <canvas></canvas>
+        <div class="menu">
+            <div class="item-menu-icon">
+                <ion-icon name="color-palette-outline"></ion-icon>
+            </div>
+            <div class="brush-menu-icon">
+                <ion-icon name="brush-outline"></ion-icon>
+            </div>
+            <button class="play-button active" style="--accent: green"><ion-icon name="play-outline"></ion-icon></button>
+            <button class="pause-button" style="--accent: green"><ion-icon name="pause-outline"></ion-icon></button>
+        </div>
+        <div class="brush-menu">
+            <p>Brush Size: </p>
+            <div id="Small"></div>
+            <div id="Medium"></div>
+            <div id="Large"></div>
+        </div>
+        <div class="item-menu">
+            <button class="item-button active" style="--accent: darkgoldenrod">Sand</button>
+            <button class="item-button" style="--accent: lightseagreen">Water</button>
+            <button class="item-button" style="--accent: grey">Concrete</button>
+            <button class="item-button" style="--accent: rgb(35, 10, 10)">Oil</button>
+            <button class="item-button" style="--accent: red">Fire</button>
+            <button class="item-button" style="--accent: saddlebrown">Fuse</button>
+            <button class="item-button" style="--accent: rgb(1, 80, 1)">Plant</button>
+            <button class="item-button" style="--accent: #C0C0C0">Sink</button>
+            <button class="item-button" style="--accent: rgb(0, 170, 0)">Acid</button>
+            <button class="item-button" style="--accent: rgb(150, 150, 150)">Steam</button>
+            <button class="item-button" style="--accent: rgb(45, 40, 40)">Gunpowder</button>
+            <button class="item-button" style="--accent: lightblue">Spout</button>
+            <button class="item-button" style="--accent: rgb(50, 120, 50)">Toxin</button>        
+            <button class="item-button" style="--accent: rgb(80, 30, 30)">Torch</button>
+            <button class="item-button" style="--accent: rgb(100, 0, 100)">Amethyst</button>
+            <button class="item-button" style="--accent: rgb(110, 0, 0)">Lava</button>
+            <button class="item-button" style="--accent: rgb(215, 172, 21)">Lightning</button>
+            <button class="item-button" style="--accent: rgb(25, 25, 25)">Fairy_Dust</button>
+        </div>
     </div>
-    <div class="menu">
-        <button class="active" style="--accent: darkgoldenrod">Sand</button>
-        <button style="--accent: lightseagreen">Water</button>
-        <button style="--accent: grey">Concrete</button>
-        <button style="--accent: rgb(35, 10, 10)">Oil</button>
-        <button style="--accent: red">Fire</button>
-        <button style="--accent: saddlebrown">Fuse</button>
-        <button style="--accent: rgb(1, 80, 1)">Plant</button>
-        <button style="--accent: #C0C0C0">Sink</button>
-        <button style="--accent: rgb(0, 170, 0)">Acid</button>
-        <button style="--accent: rgb(150, 150, 150)">Steam</button>
-        <button style="--accent: rgb(45, 40, 40)">Gunpowder</button>
-        <button style="--accent: lightblue">Spout</button>
-        <button style="--accent: rgb(50, 120, 50)">Toxin</button>
-        
-        <button style="--accent: rgb(80, 30, 30)">Torch</button>
-        <button style="--accent: rgb(100, 0, 100)">Amethyst</button>
-        <button style="--accent: rgb(110, 0, 0)">Lava</button>
-    </div>
-    <div class="preferences">
+    <!-- <div class="preferences">
         <p>Brush Size: </p>
         <div>
             <input type="radio" id="Small" value="Small" name="brush-sizes">
@@ -48,13 +63,13 @@
             <input type="radio" id="Large" value="Large" name="brush-sizes">
             <label for="Large">Large</label><br>
         </div>
-    </div>
-    <div class="preferences">
+    </div> -->
+    <!-- <div class="preferences">
         <p>Spicy Lag Switch: </p>
         <div>
             <input type="checkbox" id="lag-switch" value="lag-switch" name="lag-switch">
         </div>
-    </div>
+    </div> -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="./Classes/Particle.js"></script>
@@ -78,6 +93,8 @@
     <script src="./Classes/Gas/Steam.js"></script>
     <script src="./Classes/Gas/Toxin.js"></script>
     <script src="./Classes/Special/Fire.js"></script>
+    <script src="./Classes/Special/Lightning.js"></script>
+    <script src="./Classes/Special/Fairy_Dust.js"></script>
     <script src="./Classes/Grid.js"></script>
     <script src="utils.js"></script>
     <script src="script.js"></script>

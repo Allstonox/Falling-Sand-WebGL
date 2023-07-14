@@ -234,6 +234,30 @@ class Grid {
                         },
                     }));
                     break;
+                case 'Lightning':
+                    particles.push(new Lightning({
+                        x: grid[theRow][theColumn].x,
+                        y: grid[theRow][theColumn].y,
+                        width: grid[theRow][theColumn].width,
+                        height: grid[theRow][theColumn].height,
+                        index: {
+                            row: theRow,
+                            column: theColumn,
+                        },
+                    }));
+                    break;
+                case 'Fairy_Dust':
+                    particles.push(new Fairy_Dust({
+                        x: grid[theRow][theColumn].x,
+                        y: grid[theRow][theColumn].y,
+                        width: grid[theRow][theColumn].width,
+                        height: grid[theRow][theColumn].height,
+                        index: {
+                            row: theRow,
+                            column: theColumn,
+                        },
+                    }));
+                    break;
             }
             if (!(grid[theRow][theColumn].particle instanceof Wall) && grid[theRow][theColumn].particle != null) {
                 particles.splice(particles.indexOf(grid[theRow][theColumn].particle), 1);

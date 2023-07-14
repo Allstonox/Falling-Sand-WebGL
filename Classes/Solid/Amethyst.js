@@ -9,7 +9,6 @@ class Amethyst extends Solid {
         else {
             this.canGrow = false;
         }
-        this.bufferIndex = 15;
     }
 
     specificUpdate() {

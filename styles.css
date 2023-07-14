@@ -28,11 +28,11 @@ canvas {
 }
 
 body {
-    display: flex;
-    justify-content: baseline;
+    /* display: flex;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: auto;
+    flex-direction: column; */
+    height: 100vh;
     width: 100%;
     background: #212121;
     /* The styles below apply margin to the body in order to avoid address bars/displays on mobile  */
@@ -40,21 +40,50 @@ body {
     margin-bottom: env(safe-area-inset-bottom);
 }
 
-.simulation-menu {
-    display: flex;
-    width: 200px;
+.canvas-wrapper {
+    position: relative;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 100%;
+    max-width: 750px;
     height: auto;
-    /* background: black; */
-    margin: 0.25rem 0.25rem;
-    gap: 1rem;
-}
-
-ion-icon {
-    width: 20px;
-    height: 20px;
 }
 
 .menu {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: transparent;
+    border: solid 2px white;
+    border-radius: 10px;
+    padding: 0.5rem;
+    width: 240px;
+    height: 60px;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+.menu ion-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.item-menu-icon,
+.brush-menu-icon, .play-button, .pause-button {
+    cursor: pointer;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.item-menu {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: grid;
     place-items: center;
     grid-template-columns: repeat(3, 1fr);
@@ -63,30 +92,75 @@ ion-icon {
     padding: 0.5rem;
     gap: 0.5rem;
     width: 95%;
+    max-width: 700px;
     height: auto;
     background: #000000;
     border: solid 2px white;
     border-radius: 10px;
 }
 
-button {
+.item-button {
     width: 100%;
     height: 35px;
     font-size: clamp(0.5rem, 3vw, 1.5rem);
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 10px;
+    border: none;
+    background: var(--accent);
+    cursor: pointer;
+}
+
+.brush-menu {
+    visibility: hidden;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 240px;
+    height: auto;
+    padding: 0.5rem;
+    top: 80px;
+    left: 10px;
     border: solid 2px white;
+    border-radius: 10px;
     background: black;
+}
+
+.brush-menu #Small {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+.brush-menu #Medium{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+.brush-menu #Large {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: white;
     cursor: pointer;
 }
 
 .active {
-    border: none;
+    border: solid 2px white;
     background: var(--accent);
 }
 
-.preferences {
+.visible {
+    visibility: visible;
+}
+
+/* .preferences {
     display: flex;
     align-items: start;
     justify-content: start;
@@ -96,4 +170,4 @@ button {
     text-transform: uppercase;
     font-weight: bold;
     font-size: clamp(1rem, 3vw, 1.5rem);
-}
+} */
