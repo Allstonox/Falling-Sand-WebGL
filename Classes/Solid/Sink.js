@@ -2,12 +2,23 @@ class Sink extends Solid {
     constructor({ x, y, width, height, index, color = {red: 0.7529411764705882, green: 0.7529411764705882, blue: 0.7529411764705882}, dynamic = false }) {
         super({ x, y, width, height, index, color, dynamic });
 
+        this.deleteCounter = 20;
         this.readyToDelete = false;
         this.bufferIndex = 8;
     }
 
     specificUpdate() {
         this.checkNeighbors();
+        this.subtractCounter();
+    }
+
+    subtractCounter() {
+        if(this.deleteCounter > 0) {
+            this.deleteCounter--;
+        }
+        else if(this.deleteCounter <= 0) {
+            this.readyToDelete = true;
+        }
     }
 
     checkNeighbors() {
@@ -18,10 +29,11 @@ class Sink extends Solid {
                         particles.splice(particles.indexOf(grid[i][j].particle), 1);
                         grid[i][j].particle = null;
                         this.readyToDelete = false;
+                        this.deleteCounter = 20;
                     }
-                    else if(!this.readyToDelete && !(grid[i][j].particle instanceof Sink) && !(grid[i][j].particle instanceof Wall)) {
-                        this.readyToDelete = true;
-                    }
+                    // else if(!this.readyToDelete && !(grid[i][j].particle instanceof Sink) && !(grid[i][j].particle instanceof Wall)) {
+                    //     this.readyToDelete = true;
+                    // }
                 }
             }
         }

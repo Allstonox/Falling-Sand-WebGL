@@ -14,6 +14,8 @@ let gl = canvas.getContext('webgl');
 const columns = canvas.width / 2;
 const rows = canvas.height / 2;
 
+let mode = 'Boxed';
+
 let vertShader;
 let vertShaderSrc;
 let fragShader;
@@ -73,28 +75,77 @@ function drawStuff(vertices, colorData) {
 }
 
 function createGrid() {
-    for (var i = 0; i < rows; i++) {
-        grid[i] = [];
-        for (var j = 0; j < columns; j++) {
-            grid[i][j] = new Grid(
-                {
-                    x: j * (canvas.width / columns),
-                    y: i * (canvas.height / rows),
-                    width: canvas.width / columns,
-                    height: canvas.height / rows,
-                });
-            if (i === 0 || j === 0 || i === rows - 1 || j === columns - 1) {
-                particles.push(new Wall({
-                    x: grid[i][j].x,
-                    y: grid[i][j].y,
-                    width: grid[i][j].width,
-                    height: grid[i][j].height,
-                    index: {
-                        row: i,
-                        column: j,
-                    },
-                }));
-                grid[i][j].particle = particles[particles.length - 1];
+    grid = [];
+    particles = [];
+    if(mode === 'Boxed') {
+        for (var i = 0; i < rows; i++) {
+            grid[i] = [];
+            for (var j = 0; j < columns; j++) {
+                grid[i][j] = new Grid(
+                    {
+                        x: j * (canvas.width / columns),
+                        y: i * (canvas.height / rows),
+                        width: canvas.width / columns,
+                        height: canvas.height / rows,
+                    });
+                if (i === 0 || j === 0 || i === rows - 1 || j === columns - 1) {
+                    particles.push(new Wall({
+                        x: grid[i][j].x,
+                        y: grid[i][j].y,
+                        width: grid[i][j].width,
+                        height: grid[i][j].height,
+                        index: {
+                            row: i,
+                            column: j,
+                        },
+                    }));
+                    grid[i][j].particle = particles[particles.length - 1];
+                }
+            }
+        }
+    }
+    else if(mode === 'Fall-Through') {
+        for (var i = 0; i < rows; i++) {
+            grid[i] = [];
+            for (var j = 0; j < columns; j++) {
+                grid[i][j] = new Grid(
+                    {
+                        x: j * (canvas.width / columns),
+                        y: i * (canvas.height / rows),
+                        width: canvas.width / columns,
+                        height: canvas.height / rows,
+                    });
+                if (i === 0 || j === 0 || j === columns - 1) {
+                    particles.push(new Wall({
+                        x: grid[i][j].x,
+                        y: grid[i][j].y,
+                        width: grid[i][j].width,
+                        height: grid[i][j].height,
+                        index: {
+                            row: i,
+                            column: j,
+                        },
+                    }));
+                    grid[i][j].particle = particles[particles.length - 1];
+                }
+                if (i === rows - 1 && grid[i][j].particle === null) {
+                    particles.push(new Wall_Sink({
+                        x: grid[i][j].x,
+                        y: grid[i][j].y,
+                        width: grid[i][j].width,
+                        height: grid[i][j].height,
+                        index: {
+                            row: i,
+                            column: j,
+                        },
+                        color: {
+                            red: -1,
+                            green: -1,
+                            blue: -1,
+                        }
+                    }));
+                    grid[i][j].particle = particles[particles.length - 1];
+                }
             }
         }
     }
@@ -161,25 +212,23 @@ function draw() {
 
 // Play & Pause Events
 const playButton = document.querySelector('.play-button');
-const pauseButton = document.querySelector('.pause-button');
+// const pauseButton = document.querySelector('.pause-button');
 let playing = true;
 
 playButton.addEventListener('click', (event) => {
-    playing = true;
-    if (playButton.classList.contains('active')) playButton.classList.toggle('active');
-    if (pauseButton.classList.contains('active')) pauseButton.classList.toggle('active');
-    playButton.classList.toggle('active');
-});
-pauseButton.addEventListener('click', (event) => {
-    playing = false;
-    if (playButton.classList.contains('active')) playButton.classList.toggle('active');
-    if (pauseButton.classList.contains('active')) pauseButton.classList.toggle('active');
-    pauseButton.classList.toggle('active');
+    if(playing === false) {
+        playing = true;
+        playButton.innerHTML = '<ion-icon name="pause-outline"></ion-icon>'
+    }
+    else if(playing === true) {
+        playing = false;
+        playButton.innerHTML = '<ion-icon name="play-outline"></ion-icon>'
+    }
 });
 
-// Menu button events
+// Item menu button events
 const itemMenuIcon = document.querySelector('.item-menu-icon');
-const itemMenu = document.querySelector('.item-menu');
+const itemMenu = document.querySelector('#item-menu');
 const buttons = itemMenu.querySelectorAll('button');
 
 itemMenuIcon.addEventListener('click', () => {
@@ -221,12 +270,26 @@ largeBrush.addEventListener('click', (event) => {
     brushMenu.classList.toggle('visible');
 });
 
-// const lagSwitch = document.querySelector('#lag-switch');
-// let lagSwitchOn = false;
-// lagSwitch.addEventListener('click', (event) => {
-//     if (lagSwitch.checked) lagSwitchOn = true;
-//     else lagSwitchOn = false;
-// });
+//Settings Menu
+const settingsMenuIcon = document.querySelector('.settings-menu-icon');
+const settingsMenu = document.querySelector('#settings-menu');
+const boxedCheckbox = document.querySelector('#Boxed');
+const fallThroughCheckbox = document.querySelector('#Fall-Through');
+
+settingsMenuIcon.addEventListener('click', (event) => {
+    settingsMenu.classList.toggle('visible');
+})
+
+boxedCheckbox.addEventListener('click', (event) => {
+    mode = "Boxed";
+    createGrid();
+    settingsMenu.classList.toggle('visible');
+})
+fallThroughCheckbox.addEventListener('click', (event) => {
+    mode = "Fall-Through";
+    createGrid();
+    settingsMenu.classList.toggle('visible');
+})
 
 
 //Main loop

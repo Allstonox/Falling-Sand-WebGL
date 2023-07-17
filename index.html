@@ -12,15 +12,17 @@
 <body>
     <div class="canvas-wrapper">
         <canvas></canvas>
-        <div class="menu">
+        <div class="main-menu">
             <div class="item-menu-icon">
-                <ion-icon name="color-palette-outline"></ion-icon>
+                <ion-icon name="color-palette"></ion-icon>
             </div>
             <div class="brush-menu-icon">
-                <ion-icon name="brush-outline"></ion-icon>
+                <ion-icon name="brush"></ion-icon>
             </div>
-            <button class="play-button active" style="--accent: green"><ion-icon name="play-outline"></ion-icon></button>
-            <button class="pause-button" style="--accent: green"><ion-icon name="pause-outline"></ion-icon></button>
+            <button class="play-button active" style="--accent: grey"><ion-icon name="pause-outline"></ion-icon></button>
+            <div class="settings-menu-icon">
+                <ion-icon class="settings-menu-icon" name="settings-sharp"></ion-icon>
+            </div>
         </div>
         <div class="brush-menu">
             <p>Brush Size: </p>
@@ -28,7 +30,7 @@
             <div id="Medium"></div>
             <div id="Large"></div>
         </div>
-        <div class="item-menu">
+        <div id='item-menu' class="item-menu">
             <button class="item-button active" style="--accent: darkgoldenrod">Sand</button>
             <button class="item-button" style="--accent: lightseagreen">Water</button>
             <button class="item-button" style="--accent: grey">Concrete</button>
@@ -48,7 +50,25 @@
             <button class="item-button" style="--accent: rgb(215, 172, 21)">Lightning</button>
             <button class="item-button" style="--accent: rgb(25, 25, 25)">Fairy_Dust</button>
         </div>
+        <div id="settings-menu" class="settings-menu">
+            <h2>Settings</h2>
+            <div>
+                <div class="modes settings-attribute">
+                    <h3>Mode:</h3>
+                    <div>
+                        <input type="radio" id="Boxed" value="Boxed" name="Modes" checked>
+                        <label for="Boxed">Boxed</label><br>
+                    </div>
+                    <div>
+                        <input type="radio" id="Fall-Through" value="Fall-Through" name="Modes">
+                        <label for="Fall-Through">Fall-Through</label><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
     <!-- <div class="preferences">
         <p>Brush Size: </p>
         <div>
@@ -75,6 +95,7 @@
     <script src="./Classes/Particle.js"></script>
     <script src="./Classes/Solid/Solid.js"></script>
     <script src="./Classes/Solid/Wall.js"></script>
+    <script src="./Classes/Solid/Wall_Sink.js"></script>
     <script src="./Classes/Solid/Concrete.js"></script>
     <script src="./Classes/Solid/Sand.js"></script>
     <script src="./Classes/Solid/Fuse.js"></script>

@@ -56,7 +56,7 @@ class Fire extends Particle {
         for (let i = this.index.row - 1; i < this.index.row + 2; i++) {
             for (let j = this.index.column - 1; j < this.index.column + 2; j++) {
                 if (grid[i][j].particle != null) {
-                    if (grid[i][j].particle.flammable && this.readyToBurn(grid[i][j].particle.burnChance) && Math.random() > 0.5) {
+                    if (grid[i][j].particle.flammable && this.readyToBurn(grid[i][j].particle.burnChance) && Math.random() > 0.3) {
                         particles.push(new Fire({
                             x: grid[i][j].x,
                             y: grid[i][j].y,

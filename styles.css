@@ -50,7 +50,7 @@ body {
     height: auto;
 }
 
-.menu {
+.main-menu {
     position: absolute;
     display: flex;
     justify-content: space-around;
@@ -66,13 +66,13 @@ body {
     z-index: 100;
 }
 
-.menu ion-icon {
+.main-menu ion-icon {
     width: 30px;
     height: 30px;
 }
 
 .item-menu-icon,
-.brush-menu-icon, .play-button, .pause-button {
+.brush-menu-icon,.settings-menu-icon, .play-button, .pause-button {
     cursor: pointer;
     border-radius: 10px;
     background: transparent;
@@ -88,7 +88,6 @@ body {
     place-items: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
-    margin: 0.25rem 0.25rem;
     padding: 0.5rem;
     gap: 0.5rem;
     width: 95%;
@@ -149,6 +148,39 @@ body {
     border-radius: 50%;
     background: white;
     cursor: pointer;
+}
+
+.settings-menu {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 1rem;
+    gap: 0.5rem;
+    width: 95%;
+    max-width: 700px;
+    height: auto;
+    background: rgba(255, 255, 255, 0.2);
+    border: solid 2px white;
+    border-radius: 10px;
+}
+
+.modes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings-attribute {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 1rem;
+    gap: 1rem;
 }
 
 .active {
